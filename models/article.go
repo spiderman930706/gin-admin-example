@@ -3,11 +3,12 @@ package models
 import (
 	"time"
 
+	"github.com/spiderman930706/gin_admin/models"
 	"gorm.io/gorm"
 )
 
 type Article struct {
-	Model
+	models.Model
 
 	TagID int `json:"tag_id" gorm:"index"`
 	Tag   Tag `json:"tag"`
@@ -77,11 +78,11 @@ func DeleteArticle(id int) bool {
 }
 
 func (article *Article) BeforeCreate(tx *gorm.DB) (err error) {
-	article.CreatedOn = int(time.Now().Unix())
+	article.CreatedOn = time.Now()
 	return nil
 }
 
 func (article *Article) BeforeUpdate(tx *gorm.DB) (err error) {
-	article.ModifiedOn = int(time.Now().Unix())
+	article.ModifiedOn = time.Now()
 	return nil
 }

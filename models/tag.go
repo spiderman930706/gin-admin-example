@@ -1,12 +1,14 @@
 package models
 
 import (
-	"gorm.io/gorm"
 	"time"
+
+	"github.com/spiderman930706/gin_admin/models"
+	"gorm.io/gorm"
 )
 
 type Tag struct {
-	Model
+	models.Model
 
 	Name       string `json:"name"`
 	CreatedBy  string `json:"created_by"`
@@ -47,12 +49,12 @@ func AddTag(name string, state int, createdBy string) bool {
 }
 
 func (tag *Tag) BeforeCreate(tx *gorm.DB) (err error) {
-	tag.CreatedOn = int(time.Now().Unix())
+	tag.CreatedOn = time.Now()
 	return nil
 }
 
 func (tag *Tag) BeforeUpdate(tx *gorm.DB) (err error) {
-	tag.ModifiedOn = int(time.Now().Unix())
+	tag.ModifiedOn = time.Now()
 	return nil
 }
 

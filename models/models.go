@@ -1,22 +1,15 @@
 package models
 
 import (
-	"gorm.io/driver/mysql"
 	"log"
 	"os"
-	//"github.com/cengsin/oracle"
-	"gorm.io/gorm"
 
 	"go-gin-example/pkg/setting"
+	"gorm.io/driver/mysql"
+	"gorm.io/gorm"
 )
 
 var db *gorm.DB
-
-type Model struct {
-	ID         int `gorm:"primary_key" json:"id"`
-	CreatedOn  int `json:"-"`
-	ModifiedOn int `json:"-"`
-}
 
 func MysqlInit() {
 	var (
@@ -51,8 +44,6 @@ func MysqlInit() {
 		sqlDB, _ := db.DB()
 		sqlDB.SetMaxIdleConns(10)
 		sqlDB.SetMaxOpenConns(100)
-
-		MysqlTables(db)
 	}
 }
 
@@ -77,7 +68,6 @@ func MysqlTables(db *gorm.DB) {
 	err := db.AutoMigrate(
 		Article{},
 		Tag{},
-		Auth{},
 	)
 	if err != nil {
 		log.Println(err)

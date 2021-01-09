@@ -2,19 +2,16 @@ package main
 
 import (
 	"fmt"
-	"github.com/spiderman930706/gin_admin"
+	"go-gin-example/models"
 	"net/http"
 
-	"go-gin-example/models"
+	"github.com/spiderman930706/gin_admin"
+	"github.com/spiderman930706/gin_admin/config"
 	"go-gin-example/pkg/setting"
 	"go-gin-example/routers"
-
-	"github.com/spiderman930706/gin_admin/config"
 )
 
 func main() {
-	models.MysqlInit()
-
 	con := config.Config{
 		Mysql: config.Mysql{
 			DbName:   "blog",
@@ -30,6 +27,11 @@ func main() {
 	router := routers.InitRouter()
 	group := router.Group("admin")
 	gin_admin.Register(con, group)
+	gin_admin.MigrateTables(
+		&models.User{},
+		&models.Tag{},
+		&models.Article{},
+	)
 
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
