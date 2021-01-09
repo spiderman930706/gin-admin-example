@@ -2,16 +2,34 @@ package main
 
 import (
 	"fmt"
+	"github.com/spiderman930706/gin_admin"
 	"net/http"
 
 	"go-gin-example/models"
 	"go-gin-example/pkg/setting"
 	"go-gin-example/routers"
+
+	"github.com/spiderman930706/gin_admin/config"
 )
 
 func main() {
 	models.MysqlInit()
+
+	con := config.Config{
+		Mysql: config.Mysql{
+			DbName:   "blog",
+			User:     "root",
+			Password: "930706",
+			Host:     "127.0.0.1",
+		},
+		JWT: config.JWT{
+			SigningKey:   "example-key",
+			ExpireSecond: 7 * 24 * 3600,
+		},
+	}
 	router := routers.InitRouter()
+	group := router.Group("admin")
+	gin_admin.Register(con, group)
 
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),

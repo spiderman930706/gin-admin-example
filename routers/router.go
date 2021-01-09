@@ -2,12 +2,10 @@ package routers
 
 import (
 	"github.com/gin-gonic/gin"
-	"go-gin-example/middleware/jwt"
-	"go-gin-example/pkg/setting"
-	"go-gin-example/routers/api"
-	"go-gin-example/routers/api/v1"
+	"github.com/spiderman930706/gin_admin/middleware"
 
-	"github.com/a/gin-admin/routers"
+	"go-gin-example/pkg/setting"
+	"go-gin-example/routers/api/v1"
 )
 
 func InitRouter() *gin.Engine {
@@ -19,9 +17,8 @@ func InitRouter() *gin.Engine {
 
 	gin.SetMode(setting.RunMode)
 	api_ := r.Group("/api")
-	api_.POST("/auth", api.GetAuth)
 	apiV1 := api_.Group("/v1")
-	apiV1.Use(jwt.JWT())
+	apiV1.Use(middleware.JWTAuth())
 	{
 		//获取标签列表
 		apiV1.GET("/tags", v1.GetTags)
