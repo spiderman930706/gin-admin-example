@@ -6,7 +6,7 @@ import (
 
 type User struct {
 	models.User
-	Phone string `gorm:"column:phone_num;type:varchar(15);unique_index" json:"phone" admin:"list:modified_time;type:time"`
+	Phone string `gorm:"column:phone_num;type:varchar(15);unique_index" json:"phone"`
 }
 
 func CheckAuth(username, password string) bool {
