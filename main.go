@@ -26,8 +26,9 @@ func main() {
 	}
 	router := routers.InitRouter()
 	group := router.Group("admin")
-	gin_admin.Register(con, group)
-	gin_admin.MigrateTables(
+	gin_admin.RegisterConfigAndRouter(con, group)
+	gin_admin.RegisterTables(
+		true,
 		&models.User{},
 		&models.Tag{},
 		&models.Article{},
