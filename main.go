@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/spiderman930706/gin_admin/global"
 	"go-gin-example/models"
 	"net/http"
 
@@ -33,7 +34,7 @@ func main() {
 		&models.Tag{},
 		&models.Article{},
 	)
-
+	fmt.Println(global.Tables)
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%d", setting.HTTPPort),
 		Handler:        router,
