@@ -17,3 +17,7 @@ func CheckAuth(username, password string) bool {
 	}
 	return false
 }
+
+func (user User) CanModify() bool {
+	return false
+}

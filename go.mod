@@ -14,4 +14,4 @@ require (
 	gorm.io/gorm v1.20.9
 )
 
-replace github.com/spiderman930706/gin_admin => C:\Users\Administrator\Desktop\go_project\gin_admin
+replace github.com/spiderman930706/gin_admin => F:\linuxshare\1工作\go_project\src\gin_admin
