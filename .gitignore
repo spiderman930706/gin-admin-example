@@ -11,3 +11,6 @@ test/
 
 # doc
 apidoc/
+
+go.mod
+go.sum
